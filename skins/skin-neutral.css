@@ -1,0 +1,164 @@
+/* =========================================
+   LUCEN OS – RICH NEUTRAL SKIN
+   Deep earth-neutral, soft black glass,
+   warm undertones, high-end OS feel.
+========================================= */
+
+:root {
+  /* Backgrounds */
+  --bg: #f4f1ed;            /* Soft parchment */
+  --bg-strong: #ebe7e2;      /* Slightly darker variant */
+
+  /* Text */
+  --text: #1b1d20;           /* Charcoal */
+  --text-soft: #4c4f53;      /* Muted grey */
+
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-shadow: 0 6px 32px rgba(0, 0, 0, 0.12);
+
+  /* Header */
+  --header-bg: #ffffff;
+  --header-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+
+  /* Toolbar Pills */
+  --pill-bg: #f1efeb;
+  --pill-bg-active: #dedbd6;
+  --pill-border: #d6d3cf;
+
+  /* Buttons */
+  --btn-bg: #0d654f;              /* Rich deep green */
+  --btn-bg-hover: #0b5946;
+  --btn-text: #ffffff;
+
+  /* Footer (Global Nav) */
+  --footer-bg: #0b0f14;           /* Soft black-glass */
+  --footer-text: #d8e5ea;         /* Light mist */
+  --footer-accent: #3aba96;       /* Lucen green signature */
+  --footer-accent-text: #002e1e;
+
+  --radius: 18px;
+  --radius-pill: 999px;
+
+  --shadow: 0 6px 32px rgba(0,0,0,0.18);
+}
+
+
+/* ===========================
+   BODY / BASE
+=========================== */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* ===========================
+   HEADER (Local Nav)
+=========================== */
+
+.header-shell {
+  background: var(--header-bg);
+  box-shadow: var(--header-shadow);
+}
+
+.header-back {
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+}
+
+.header-title {
+  color: var(--text);
+}
+
+.header-sub,
+.header-pos {
+  color: var(--text-soft);
+}
+
+
+/* ===========================
+   TOOLBAR PILLS
+=========================== */
+
+.toolbar-pill {
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  color: var(--text);
+}
+
+.toolbar-pill.active {
+  background: var(--pill-bg-active);
+  border-color: var(--pill-border);
+}
+
+
+/* ===========================
+   CARDS
+=========================== */
+
+.card {
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+}
+
+.card-title {
+  color: var(--text);
+}
+
+.card-summary {
+  color: var(--text-soft);
+}
+
+.card-meta {
+  color: var(--text-soft);
+}
+
+.card-btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.card-btn:hover {
+  background: var(--btn-bg-hover);
+}
+
+
+/* ===========================
+   FOOTER (Global Nav)
+=========================== */
+
+.footer-shell {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.footer-title {
+  color: var(--footer-text);
+}
+
+.footer-sub {
+  color: var(--footer-text);
+  opacity: 0.7;
+}
+
+.footer-link {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--footer-text);
+}
+
+.footer-link:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.footer-donate {
+  background: var(--footer-accent);
+  color: var(--footer-accent-text);
+  border-color: #0f6d52;
+}
+
+.footer-donate:hover {
+  background: #3ccaa1;
+}
