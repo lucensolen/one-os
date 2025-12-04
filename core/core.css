@@ -1,0 +1,212 @@
+/* ================================
+   CORE LAYOUT BASE
+================================ */
+
+:root {
+  --bg: #f6f5f2;
+  --text: #1f1f1f;
+
+  /* Neutral skin (footer/toolbar) */
+  --footer-bg: #0d1217;
+  --footer-text: #d6e2ea;
+  --footer-accent: #3aba96;
+
+  --radius: 18px;
+  --radius-pill: 50px;
+
+  --shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#app {
+  padding: 16px;
+  padding-bottom: 200px; /* space above footer */
+}
+
+
+/* ================================
+   HEADER / LOCAL NAV
+================================ */
+
+.header-shell {
+  width: 100%;
+  background: white;
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-top-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-back {
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: #ececec;
+  cursor: pointer;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.header-sub {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.header-pos {
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+.toolbar {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.toolbar-pill {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.toolbar-pill.active {
+  background: #ddd;
+}
+
+
+/* ================================
+   CONTENT / CARDS
+================================ */
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-summary {
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
+.card-meta {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.card-btn {
+  margin-top: 14px;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: #279d81;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* ================================
+   FOOTER / GLOBAL NAV
+================================ */
+
+.footer-shell {
+  position: fixed;
+  bottom: -400px;
+  left: 0;
+  width: 100%;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+  transition: bottom 0.25s ease;
+  padding: 22px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  z-index: 200;
+}
+
+.footer-shell.visible {
+  bottom: 0;
+}
+
+.footer-static {
+  bottom: 0 !important;
+}
+
+.footer-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.footer-sub {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.footer-rows {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footer-link {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #1a242e;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--footer-text);
+}
+
+.footer-donate {
+  background: var(--footer-accent);
+  color: #00351f;
+  border-color: #0f6d52;
+}
