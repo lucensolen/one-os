@@ -2,28 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lucen OS – Neutral Engine Runtime</title>
+  <title>One OS – Neutral Runtime</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- CORE STYLES -->
-  <link rel="stylesheet" href="core/core.css?v=100" />
-  <link rel="stylesheet" href="skins/skin-neutral.css?v=100" />
+  <link rel="stylesheet" href="core/core.css?v=1" />
+  <link rel="stylesheet" href="skins/skin-neutral.css?v=1" />
 </head>
 
 <body>
+  <!-- LOCAL NAV + VIEWS get mounted above this -->
   <div id="app"></div>
 
   <!-- COMPONENTS -->
-  <script src="core/components.js?v=100"></script>
+  <script src="core/components.js?v=1"></script>
 
   <!-- ENGINE -->
-  <script src="core/app.js?v=100"></script>
+  <script src="core/app.js?v=1"></script>
 
   <!-- WORLD CONFIG -->
-  <script src="data/world-neutral.js?v=100"></script>
+  <script src="data/world-neutral.js?v=1"></script>
 
   <script>
-    LucenOS.initNeutral();
+    LucenOS.init();
   </script>
 </body>
 </html>
