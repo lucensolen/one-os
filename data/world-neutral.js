@@ -1,63 +1,60 @@
-/* =====================================================
-   ONE OS – WORLD CONFIG (Neutral Demo World)
-===================================================== */
+/* ______________________________
+   LUCEN OS – NEUTRAL WORLD DATA
+________________________________ */
 
 window.LucenWorld = {
-
   masterFields: [
-
     {
-      id: "clarity",
+      id: "mf-clarity",
       name: "Clarity Movement",
       short: "Wellbeing • Awareness • Growth",
-
       fields: [
         {
-          id: "help",
-          name: "Help To Heal",
-          short: "Healing tools and emotional support",
-
+          id: "field-clarity-core",
+          name: "Core Clarity Field",
+          short: "Anchor for emotional clarity and self-awareness.",
           modules: [
             {
-              id: "tools",
-              name: "Healing Tools",
-              short: "Regulation, grounding, emotional clarity",
+              id: "mod-intro",
+              name: "Starting the Journey",
+              short: "Orient yourself inside Clarity Movement.",
               minis: [
-                { id: "breath", name: "Breathing", body: "Calm system reset" },
-                { id: "steps", name: "Progress Steps", body: "Micro movement" }
+                {
+                  id: "mini-orientation",
+                  name: "Orientation",
+                  body: "A gentle starting module that explains how Clarity Movement works and how to move between fields."
+                }
               ]
             }
           ]
         }
       ]
     },
-
     {
-      id: "education",
+      id: "mf-edu-freedom",
       name: "Educational Freedom",
       short: "Learning that adapts to the child",
-
       fields: [
         {
-          id: "learn",
-          name: "Learning Tools",
-          short: "Adaptive learning field",
-
+          id: "field-ef-core",
+          name: "Home Education Hub",
+          short: "Tools and views for flexible learning at home.",
           modules: [
             {
-              id: "math",
-              name: "Math Tools",
-              short: "Number sense & intuition",
+              id: "mod-ef-intro",
+              name: "EF Core Module",
+              short: "Anchor for Educational Freedom OS.",
               minis: [
-                { id: "count", name: "Counting", body: "Understanding quantity" },
-                { id: "shape", name: "Shapes", body: "Geometric awareness" }
+                {
+                  id: "mini-ef-orientation",
+                  name: "EF Orientation",
+                  body: "Overview of how Educational Freedom structures days, weeks, and learning arcs around the child."
+                }
               ]
             }
           ]
         }
       ]
     }
-
   ]
-
 };
