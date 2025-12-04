@@ -1,102 +1,13 @@
-/* =======================================================
-   ONE OS – CLASSIC NEUTRAL SKIN
-   Light • Clean • Universal
-======================================================= */
+/* Neutral / rich skin overrides for One OS */
 
-:root {
-  /* Backgrounds */
-  --bg: #f6f5f2;
-  --bg-strong: #efede9;
-
-  /* Text */
-  --text: #1f1f1f;
-  --text-soft: #555;
-
-  /* Header */
-  --header-bg: #ffffff;
-  --header-shadow: 0 4px 24px rgba(0,0,0,0.10);
-
-  /* Toolbar Pills */
-  --pill-bg: #f1efeb;
-  --pill-bg-active: #dedbd6;
-  --pill-border: #d6d3cf;
-
-  /* Cards */
-  --card-bg: #ffffff;
-  --card-shadow: 0 6px 28px rgba(0,0,0,0.10);
-
-  /* Buttons */
-  --btn-bg: #279d81; 
-  --btn-bg-hover: #1d7e68;
-  --btn-text: #ffffff;
-
-  /* Footer (Global Nav) */
-  --footer-bg: #0d1217;
-  --footer-text: #d6e2ea;
-  --footer-accent: #3aba96;
-  --footer-accent-text: #00351f;
-
-  --radius: 16px;
-  --radius-pill: 999px;
-}
-
-/* ------------------------------------------------------
-   BODY BACKGROUND + DEFAULT TEXT
-------------------------------------------------------- */
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: radial-gradient(circle at top, #fdfdfb 0, #f2eee6 40%, #e5ddcf 100%);
 }
 
-/* ------------------------------------------------------
-   COMPONENT OVERRIDES (if needed)
-------------------------------------------------------- */
-
-/* Header */
 .header-shell {
-  background: var(--header-bg);
-  box-shadow: var(--header-shadow);
+  background: rgba(247, 245, 240, 0.96);
 }
 
-/* Toolbar Pills */
-.toolbar-pill {
-  background: var(--pill-bg);
-  border: 1px solid var(--pill-border);
-  color: var(--text);
-}
-.toolbar-pill.active {
-  background: var(--pill-bg-active);
-}
-
-/* Cards */
 .card {
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
-}
-
-/* Card Button */
-.card-btn {
-  background: var(--btn-bg);
-  color: var(--btn-text);
-}
-.card-btn:hover {
-  background: var(--btn-bg-hover);
-}
-
-/* Footer */
-.footer-shell {
-  background: var(--footer-bg);
-  color: var(--footer-text);
-}
-
-.footer-link {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: var(--footer-text);
-}
-
-.footer-donate {
-  background: var(--footer-accent);
-  color: var(--footer-accent-text);
-  border-color: #0f6d52;
+  background: #ffffff;
 }
