@@ -1,8 +1,7 @@
-/* ============================================================
+/* ================================
    LUCEN OS – NEUTRAL WORLD DATA
-   This file defines the world the engine renders.
-   Guaranteed valid structure.
-============================================================ */
+   Minimal known-good world
+================================ */
 
 window.LucenWorld = {
   masterFields: [
@@ -10,29 +9,26 @@ window.LucenWorld = {
       id: "clarity",
       name: "Clarity Movement",
       short: "Wellbeing • Awareness • Growth",
-
       fields: [
         {
           id: "clarity-field-1",
           name: "Emotional Clarity",
           short: "Tools for self-awareness",
-
           modules: [
             {
               id: "clarity-mod-1",
               name: "Breathwork Module",
-              short: "Simple daily grounding practices",
-
+              short: "Simple daily grounding practice",
               minis: [
                 {
                   id: "clarity-mini-1",
                   name: "Daily Reset",
-                  body: "A short guided breathing cycle designed for clarity."
+                  body: "A short guided breathing reset sequence."
                 },
                 {
                   id: "clarity-mini-2",
                   name: "Stress Release",
-                  body: "A rhythm-based exhale pattern to discharge tension."
+                  body: "A rhythm-based exhale pattern for nervous-system relief."
                 }
               ]
             }
@@ -42,27 +38,24 @@ window.LucenWorld = {
     },
 
     {
-      id: "education",
+      id: "edu",
       name: "Educational Freedom",
       short: "Learning that adapts to the child",
-
       fields: [
         {
           id: "edu-field-1",
-          name: "Core Learning",
-          short: "Foundational learning sequences",
-
+          name: "Core Learning Field",
+          short: "Skeleton for home-ed OS",
           modules: [
             {
               id: "edu-mod-1",
-              name: "LearnSpace",
-              short: "A flexible module for adaptable learning",
-
+              name: "Daily Flow",
+              short: "Light structure for the day",
               minis: [
                 {
                   id: "edu-mini-1",
-                  name: "Literacy Pulse",
-                  body: "A micro-module for daily literacy growth."
+                  name: "Morning Check-in",
+                  body: "Quick tone-check and intention setting for the day."
                 }
               ]
             }
