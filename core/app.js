@@ -1,13 +1,17 @@
-/* ========================================================
-   Lucen OS – Neutral Runtime
-======================================================== */
+/* ============================================================
+   ONE OS — NEUTRAL RUNTIME ENGINE
+   Header (Local Nav) + Footer (Global Nav)
+   Interactive Footer Mode Default
+============================================================ */
 
 const LucenOS = {
 
+  /* ---------------------------------------------------------
+     SETTINGS
+  ---------------------------------------------------------- */
   settings: {
     footerMode: "interactive",   // interactive | reveal | static
     footerHideThreshold: 80,
-    theme: "rich-neutral",
 
     showMasterFields: true,
     showSettings: true,
@@ -16,6 +20,9 @@ const LucenOS = {
     showDonate: true
   },
 
+  /* ---------------------------------------------------------
+     STATE
+  ---------------------------------------------------------- */
   state: {
     level: "core",
     masterId: null,
@@ -24,13 +31,24 @@ const LucenOS = {
     miniId: null
   },
 
-  initNeutral() {
+  /* ---------------------------------------------------------
+     INIT
+  ---------------------------------------------------------- */
+  init() {
     this.app = document.getElementById("app");
 
     this.buildHeader();
     this.buildFooter();
+
+    /* IMPORTANT:
+       Render BEFORE footer mode init
+       so the sentinel survives and footer logic is stable */
+    this.render();
+
+    this.createFooterSentinel();
     this.initFooterMode();
 
+    // Routing
     window.addEventListener("hashchange", () => this.applyRouteFromHash());
 
     if (location.hash && location.hash.length > 1) {
@@ -40,8 +58,9 @@ const LucenOS = {
     }
   },
 
-  /* ROUTING ------------------------------------------------ */
-
+  /* ---------------------------------------------------------
+     ROUTING
+  ---------------------------------------------------------- */
   encodeRoute(state) {
     const { level, masterId, fieldId, moduleId, miniId } = state;
     if (level === "core") return "#core";
@@ -53,12 +72,9 @@ const LucenOS = {
   },
 
   decodeRoute(hash) {
-    if (!hash || hash.length <= 1)
-      return { level: "core" };
-
+    if (!hash || hash.length <= 1) return { level: "core" };
     const raw = hash.slice(1);
     const p = raw.split("|");
-
     switch (p[0]) {
       case "core": return { level: "core" };
       case "master": return { level: "master", masterId: p[1] };
@@ -66,7 +82,6 @@ const LucenOS = {
       case "module": return { level: "module", masterId: p[1], fieldId: p[2], moduleId: p[3] };
       case "mini": return { level: "mini", masterId: p[1], fieldId: p[2], moduleId: p[3], miniId: p[4] };
     }
-
     return { level: "core" };
   },
 
@@ -86,8 +101,9 @@ const LucenOS = {
     window.scrollTo(0, 0);
   },
 
-  /* HEADER ------------------------------------------------ */
-
+  /* ---------------------------------------------------------
+     LOCAL NAV (HEADER)
+  ---------------------------------------------------------- */
   buildHeader() {
     const shell = document.createElement("div");
     shell.className = "header-shell";
@@ -95,8 +111,8 @@ const LucenOS = {
     const h = document.createElement("div");
     h.className = "header";
 
-    const topRow = document.createElement("div");
-    topRow.className = "header-top-row";
+    const row = document.createElement("div");
+    row.className = "header-top-row";
 
     const back = document.createElement("button");
     back.className = "header-back";
@@ -107,11 +123,11 @@ const LucenOS = {
 
     const title = document.createElement("div");
     title.className = "header-title";
-    title.textContent = "Hub – Clarity Movement";
+    title.textContent = "Hub – One OS";
 
     const sub = document.createElement("div");
     sub.className = "header-sub";
-    sub.textContent = "Local Nav • Universe Navigation";
+    sub.textContent = "Local Navigation Layer";
 
     const pos = document.createElement("div");
     pos.className = "header-pos";
@@ -120,18 +136,19 @@ const LucenOS = {
     block.appendChild(sub);
     block.appendChild(pos);
 
-    topRow.appendChild(back);
-    topRow.appendChild(block);
+    row.appendChild(back);
+    row.appendChild(block);
 
     const toolbar = document.createElement("div");
     toolbar.className = "toolbar";
 
-    h.appendChild(topRow);
+    h.appendChild(row);
     h.appendChild(toolbar);
     shell.appendChild(h);
 
     document.body.insertBefore(shell, this.app);
 
+    // Store refs
     this.headerPos = pos;
     this.toolbar = toolbar;
     this.backButton = back;
@@ -151,6 +168,7 @@ const LucenOS = {
       `${lvl.toUpperCase()} • ${parts.length ? parts.join(" / ") : "Hub"}`;
 
     this.toolbar.innerHTML = "";
+
     const W = window.LucenWorld;
 
     if (lvl === "core") {
@@ -180,7 +198,11 @@ const LucenOS = {
       );
       ctx.field.modules.forEach(m =>
         this.toolbar.appendChild(
-          LucenComponents.createToolbarPill(m.name, false, () => this.goModule(ctx.master.id, ctx.field.id, m.id))
+          LucenComponents.createToolbarPill(
+            m.name,
+            ctx.module && ctx.module.id === m.id,
+            () => this.goModule(ctx.master.id, ctx.field.id, m.id)
+          )
         )
       );
       return;
@@ -192,14 +214,19 @@ const LucenOS = {
       );
       ctx.field.modules.forEach(m =>
         this.toolbar.appendChild(
-          LucenComponents.createToolbarPill(m.name, false, () => this.goModule(ctx.master.id, ctx.field.id, m.id))
+          LucenComponents.createToolbarPill(
+            m.name,
+            ctx.module && ctx.module.id === m.id,
+            () => this.goModule(ctx.master.id, ctx.field.id, m.id)
+          )
         )
       );
     }
   },
 
-  /* FOOTER ------------------------------------------------ */
-
+  /* ---------------------------------------------------------
+     GLOBAL NAV (FOOTER)
+  ---------------------------------------------------------- */
   buildFooter() {
     const shell = document.createElement("div");
     shell.className = "footer-shell";
@@ -209,47 +236,49 @@ const LucenOS = {
 
     const title = document.createElement("div");
     title.className = "footer-title";
-    title.textContent = "Global Nav – Lucen Hub";
+    title.textContent = "Global Navigation";
 
     const sub = document.createElement("div");
     sub.className = "footer-sub";
-    sub.textContent = "OS navigation • Modes • Settings";
+    sub.textContent = "OS-level Controls • Modes • Settings";
 
     const rows = document.createElement("div");
     rows.className = "footer-rows";
 
-    const row1 = document.createElement("div");
-    row1.className = "footer-row";
+    // Row 1
+    const r1 = document.createElement("div");
+    r1.className = "footer-row";
 
-    row1.appendChild(this.btn("Hub", () => this.goCore()));
-    row1.appendChild(this.btn("Master Fields", () => this.goCore()));
+    r1.appendChild(this.btn("Hub", () => this.goCore()));
+    r1.appendChild(this.btn("Master Fields", () => this.goCore()));
 
-    const row2 = document.createElement("div");
-    row2.className = "footer-row";
+    // Row 2
+    const r2 = document.createElement("div");
+    r2.className = "footer-row";
 
-    row2.appendChild(this.btn("Settings", () => alert("Settings panel coming")));
-    row2.appendChild(this.btn("Modes", () => alert("Modes coming")));
+    r2.appendChild(this.btn("Settings", () => alert("Settings coming")));
+    r2.appendChild(this.btn("Modes", () => alert("Modes coming")));
 
-    const row3 = document.createElement("div");
-    row3.className = "footer-row";
+    // Row 3
+    const r3 = document.createElement("div");
+    r3.className = "footer-row";
 
-    row3.appendChild(this.btn("Support", () => alert("Support coming")));
+    r3.appendChild(this.btn("Support", () => alert("Support coming")));
 
     const donate = document.createElement("a");
     donate.href = "https://www.educationalfreedom.uk/donate";
     donate.target = "_blank";
     donate.className = "footer-link footer-donate";
     donate.textContent = "Donate";
-    row3.appendChild(donate);
+    r3.appendChild(donate);
 
-    rows.appendChild(row1);
-    rows.appendChild(row2);
-    rows.appendChild(row3);
+    rows.appendChild(r1);
+    rows.appendChild(r2);
+    rows.appendChild(r3);
 
     f.appendChild(title);
     f.appendChild(sub);
     f.appendChild(rows);
-
     shell.appendChild(f);
     document.body.appendChild(shell);
 
@@ -264,32 +293,41 @@ const LucenOS = {
     return b;
   },
 
+  /* ---------------------------------------------------------
+     FOOTER SENTINEL (the key fix)
+  ---------------------------------------------------------- */
+  createFooterSentinel() {
+    if (!this.footerSentinel) {
+      const s = document.createElement("div");
+      s.id = "footer-trigger";
+      s.style.height = "2px";
+      s.style.width = "100%";
+      document.body.appendChild(s);
+      this.footerSentinel = s;
+    }
+  },
+
+  /* ---------------------------------------------------------
+     INTERACTIVE FOOTER MODE
+  ---------------------------------------------------------- */
   initFooterMode() {
     const mode = this.settings.footerMode;
 
-    if (!this.footerSentinel) {
-      const s = document.createElement("div");
-      s.id = "lucen-footer-trigger";
-      s.style.height = "1px";
-      this.app.appendChild(s);
-      this.footerSentinel = s;
-    }
-
-    /* Reset */
+    // Reset previous listeners/observers
     if (this.footerObserver) this.footerObserver.disconnect();
     if (this.footerScrollHandler)
       window.removeEventListener("scroll", this.footerScrollHandler);
 
-    this.footerShell.classList.remove("footer-static","visible");
+    this.footerShell.classList.remove("footer-static", "visible");
     this.footerVisible = false;
 
-    /* Static mode */
+    /* STATIC MODE */
     if (mode === "static") {
-      this.footerShell.classList.add("footer-static","visible");
+      this.footerShell.classList.add("footer-static", "visible");
       return;
     }
 
-    /* Reveal + Interactive */
+    /* REVEAL + INTERACTIVE */
     const obs = new IntersectionObserver(
       entries => {
         entries.forEach(e => {
@@ -308,6 +346,7 @@ const LucenOS = {
     obs.observe(this.footerSentinel);
     this.footerObserver = obs;
 
+    /* INTERACTIVE MODE */
     if (mode === "interactive") {
       let last = window.scrollY;
       const th = this.settings.footerHideThreshold;
@@ -316,12 +355,14 @@ const LucenOS = {
         const now = window.scrollY;
         const delta = now - last;
 
+        // scrolling up hides footer
         if (delta < 0 && this.footerVisible) {
           if ((last - now) >= th) {
             this.footerShell.classList.remove("visible");
             this.footerVisible = false;
           }
         }
+
         last = now;
       };
 
@@ -329,46 +370,48 @@ const LucenOS = {
     }
   },
 
-  /* NAVIGATION HELPERS ------------------------------------- */
-
+  /* ---------------------------------------------------------
+     NAV HELPERS
+  ---------------------------------------------------------- */
   navigateUp() {
     const l = this.state.level;
 
-    if (l === "mini") this.goModule(this.state.masterId,this.state.fieldId,this.state.moduleId);
-    else if (l === "module") this.goField(this.state.masterId,this.state.fieldId);
+    if (l === "mini") this.goModule(this.state.masterId, this.state.fieldId, this.state.moduleId);
+    else if (l === "module") this.goField(this.state.masterId, this.state.fieldId);
     else if (l === "field") this.goMaster(this.state.masterId);
     else if (l === "master") this.goCore();
   },
 
-  goCore() {
-    this.setState({ level:"core",masterId:null,fieldId:null,moduleId:null,miniId:null },true);
-  },
-  goMaster(id) {
-    this.setState({ level:"master",masterId:id,fieldId:null,moduleId:null,miniId:null },true);
-  },
-  goField(mid,fid) {
-    this.setState({ level:"field",masterId:mid,fieldId:fid,moduleId:null,miniId:null },true);
-  },
-  goModule(mid,fid,mod) {
-    this.setState({ level:"module",masterId:mid,fieldId:fid,moduleId:mod,miniId:null },true);
-  },
-  goMini(mid,fid,mod,mm) {
-    this.setState({ level:"mini",masterId:mid,fieldId:fid,moduleId:mod,miniId:mm },true);
-  },
+  goCore()     { this.setState({ level:"core", masterId:null, fieldId:null, moduleId:null, miniId:null }, true); },
+  goMaster(m)  { this.setState({ level:"master", masterId:m, fieldId:null, moduleId:null, miniId:null }, true); },
+  goField(m,f) { this.setState({ level:"field", masterId:m, fieldId:f, moduleId:null, miniId:null }, true); },
+  goModule(m,f,mod) { this.setState({ level:"module", masterId:m, fieldId:f, moduleId:mod, miniId:null }, true); },
+  goMini(m,f,mod,mm) { this.setState({ level:"mini", masterId:m, fieldId:f, moduleId:mod, miniId:mm }, true); },
 
-  /* CONTEXT LOOKUP ----------------------------------------- */
-
+  /* ---------------------------------------------------------
+     CONTEXT LOOKUP
+  ---------------------------------------------------------- */
   getContext() {
     const W = window.LucenWorld;
-    const ms = this.state.masterId ? W.masterFields.find(m => m.id === this.state.masterId) : null;
-    const fs = ms && this.state.fieldId ? ms.fields.find(f => f.id === this.state.fieldId) : null;
-    const mo = fs && this.state.moduleId ? fs.modules.find(m => m.id === this.state.moduleId) : null;
-    const mi = mo && this.state.miniId ? mo.minis.find(x => x.id === this.state.miniId) : null;
-    return { master:ms, field:fs, module:mo, mini:mi };
+
+    const mf = this.state.masterId ?
+      W.masterFields.find(m => m.id === this.state.masterId) : null;
+
+    const ff = mf && this.state.fieldId ?
+      mf.fields.find(f => f.id === this.state.fieldId) : null;
+
+    const mo = ff && this.state.moduleId ?
+      ff.modules.find(m => m.id === this.state.moduleId) : null;
+
+    const mi = mo && this.state.miniId ?
+      mo.minis.find(x => x.id === this.state.miniId) : null;
+
+    return { master:mf, field:ff, module:mo, mini:mi };
   },
 
-  /* RENDER -------------------------------------------------- */
-
+  /* ---------------------------------------------------------
+     RENDER
+  ---------------------------------------------------------- */
   render() {
     const W = window.LucenWorld;
     const ctx = this.getContext();
@@ -428,7 +471,7 @@ const LucenOS = {
           LucenComponents.createCard({
             title: m.name,
             summary: m.short,
-            meta: `Mini modules: ${m.minis.length}`,
+            meta: `Mini: ${m.minis.length}`,
             buttonLabel: "Open module",
             onOpen: () => this.goModule(ctx.master.id, ctx.field.id, m.id)
           })
@@ -451,7 +494,6 @@ const LucenOS = {
       });
 
       const list = document.createElement("div");
-
       ctx.module.minis.forEach(mm => {
         const row = document.createElement("div");
         row.textContent = mm.name;
@@ -484,4 +526,4 @@ const LucenOS = {
 
     this.app.appendChild(view);
   }
-};
+};    
