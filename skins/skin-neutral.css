@@ -1,164 +1,102 @@
-/* =========================================
-   LUCEN OS – RICH NEUTRAL SKIN
-   Deep earth-neutral, soft black glass,
-   warm undertones, high-end OS feel.
-========================================= */
+/* =======================================================
+   ONE OS – CLASSIC NEUTRAL SKIN
+   Light • Clean • Universal
+======================================================= */
 
 :root {
   /* Backgrounds */
-  --bg: #f4f1ed;            /* Soft parchment */
-  --bg-strong: #ebe7e2;      /* Slightly darker variant */
+  --bg: #f6f5f2;
+  --bg-strong: #efede9;
 
   /* Text */
-  --text: #1b1d20;           /* Charcoal */
-  --text-soft: #4c4f53;      /* Muted grey */
-
-  /* Cards */
-  --card-bg: #ffffff;
-  --card-shadow: 0 6px 32px rgba(0, 0, 0, 0.12);
+  --text: #1f1f1f;
+  --text-soft: #555;
 
   /* Header */
   --header-bg: #ffffff;
-  --header-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+  --header-shadow: 0 4px 24px rgba(0,0,0,0.10);
 
   /* Toolbar Pills */
   --pill-bg: #f1efeb;
   --pill-bg-active: #dedbd6;
   --pill-border: #d6d3cf;
 
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-shadow: 0 6px 28px rgba(0,0,0,0.10);
+
   /* Buttons */
-  --btn-bg: #0d654f;              /* Rich deep green */
-  --btn-bg-hover: #0b5946;
+  --btn-bg: #279d81; 
+  --btn-bg-hover: #1d7e68;
   --btn-text: #ffffff;
 
   /* Footer (Global Nav) */
-  --footer-bg: #0b0f14;           /* Soft black-glass */
-  --footer-text: #d8e5ea;         /* Light mist */
-  --footer-accent: #3aba96;       /* Lucen green signature */
-  --footer-accent-text: #002e1e;
+  --footer-bg: #0d1217;
+  --footer-text: #d6e2ea;
+  --footer-accent: #3aba96;
+  --footer-accent-text: #00351f;
 
-  --radius: 18px;
+  --radius: 16px;
   --radius-pill: 999px;
-
-  --shadow: 0 6px 32px rgba(0,0,0,0.18);
 }
 
-
-/* ===========================
-   BODY / BASE
-=========================== */
-
+/* ------------------------------------------------------
+   BODY BACKGROUND + DEFAULT TEXT
+------------------------------------------------------- */
 body {
   background: var(--bg);
   color: var(--text);
 }
 
+/* ------------------------------------------------------
+   COMPONENT OVERRIDES (if needed)
+------------------------------------------------------- */
 
-/* ===========================
-   HEADER (Local Nav)
-=========================== */
-
+/* Header */
 .header-shell {
   background: var(--header-bg);
   box-shadow: var(--header-shadow);
 }
 
-.header-back {
-  background: var(--pill-bg);
-  border: 1px solid var(--pill-border);
-}
-
-.header-title {
-  color: var(--text);
-}
-
-.header-sub,
-.header-pos {
-  color: var(--text-soft);
-}
-
-
-/* ===========================
-   TOOLBAR PILLS
-=========================== */
-
+/* Toolbar Pills */
 .toolbar-pill {
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
   color: var(--text);
 }
-
 .toolbar-pill.active {
   background: var(--pill-bg-active);
-  border-color: var(--pill-border);
 }
 
-
-/* ===========================
-   CARDS
-=========================== */
-
+/* Cards */
 .card {
   background: var(--card-bg);
   box-shadow: var(--card-shadow);
 }
 
-.card-title {
-  color: var(--text);
-}
-
-.card-summary {
-  color: var(--text-soft);
-}
-
-.card-meta {
-  color: var(--text-soft);
-}
-
+/* Card Button */
 .card-btn {
   background: var(--btn-bg);
   color: var(--btn-text);
 }
-
 .card-btn:hover {
   background: var(--btn-bg-hover);
 }
 
-
-/* ===========================
-   FOOTER (Global Nav)
-=========================== */
-
+/* Footer */
 .footer-shell {
   background: var(--footer-bg);
   color: var(--footer-text);
 }
 
-.footer-title {
-  color: var(--footer-text);
-}
-
-.footer-sub {
-  color: var(--footer-text);
-  opacity: 0.7;
-}
-
 .footer-link {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   color: var(--footer-text);
-}
-
-.footer-link:hover {
-  background: rgba(255,255,255,0.08);
 }
 
 .footer-donate {
   background: var(--footer-accent);
   color: var(--footer-accent-text);
   border-color: #0f6d52;
-}
-
-.footer-donate:hover {
-  background: #3ccaa1;
 }
