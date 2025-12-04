@@ -1,48 +1,61 @@
-/* ================================
-   CORE LAYOUT BASE
-================================ */
+/* ==============================================
+   ONE-OS CORE LAYOUT
+   Clean Neutral Skin (Classic)
+================================================ */
 
 :root {
   --bg: #f6f5f2;
   --text: #1f1f1f;
 
-  /* Neutral skin (footer/toolbar) */
+  --header-bg: #ffffff;
+  --header-shadow: 0 4px 24px rgba(0,0,0,0.10);
+
+  --pill-bg: #f1efeb;
+  --pill-active: #dedbd6;
+  --pill-border: #d8d6d2;
+
+  --card-bg: #ffffff;
+  --card-shadow: 0 6px 30px rgba(0,0,0,0.10);
+
+  --btn-bg: #279d81;
+  --btn-bg-hover: #1d7e68;
+  --btn-text: #ffffff;
+
   --footer-bg: #0d1217;
   --footer-text: #d6e2ea;
   --footer-accent: #3aba96;
+  --footer-accent-text: #00351f;
 
-  --radius: 18px;
-  --radius-pill: 50px;
-
-  --shadow: 0 4px 30px rgba(0,0,0,0.15);
+  --radius: 16px;
+  --radius-pill: 999px;
 }
 
-html, body {
+/* -------------------------
+   BASE
+-------------------------- */
+
+body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  height: 100%;
+  font-family: system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 #app {
-  padding: 16px;
-  padding-bottom: 200px; /* space above footer */
+  padding: 18px;
+  padding-bottom: 240px; /* reserve space above footer */
 }
 
-
-/* ================================
-   HEADER / LOCAL NAV
-================================ */
+/* -------------------------
+   HEADER (Local Nav)
+-------------------------- */
 
 .header-shell {
-  width: 100%;
-  background: white;
-  box-shadow: var(--shadow);
+  background: var(--header-bg);
+  box-shadow: var(--header-shadow);
   padding: 14px 18px;
-  box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 50;
@@ -55,11 +68,10 @@ html, body {
 }
 
 .header-back {
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: var(--radius-pill);
-  border: none;
-  background: #ececec;
-  cursor: pointer;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
 }
 
 .header-title {
@@ -69,17 +81,17 @@ html, body {
 
 .header-sub {
   font-size: 13px;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .header-pos {
-  font-size: 12px;
+  font-size: 13px;
   opacity: 0.5;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .toolbar {
-  margin-top: 12px;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -88,31 +100,29 @@ html, body {
 .toolbar-pill {
   padding: 8px 16px;
   border-radius: var(--radius-pill);
-  border: 1px solid #ddd;
-  background: #fafafa;
-  cursor: pointer;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
 }
 
 .toolbar-pill.active {
-  background: #ddd;
+  background: var(--pill-active);
 }
 
-
-/* ================================
-   CONTENT / CARDS
-================================ */
+/* -------------------------
+   CARDS
+-------------------------- */
 
 .grid {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .card {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--card-shadow);
 }
 
 .card-title {
@@ -122,42 +132,45 @@ html, body {
 
 .card-summary {
   margin-top: 6px;
+  font-size: 14px;
   opacity: 0.75;
 }
 
 .card-meta {
   margin-top: 6px;
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 
 .card-btn {
   margin-top: 14px;
   padding: 10px 18px;
   border-radius: var(--radius-pill);
-  background: #279d81;
-  color: white;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
-  cursor: pointer;
 }
 
+.card-btn:hover {
+  background: var(--btn-bg-hover);
+}
 
-/* ================================
-   FOOTER / GLOBAL NAV
-================================ */
+/* -------------------------
+   FOOTER (Global Nav)
+   Interactive OS Bar
+-------------------------- */
 
 .footer-shell {
   position: fixed;
-  bottom: -400px;
+  bottom: -360px;
   left: 0;
   width: 100%;
   background: var(--footer-bg);
   color: var(--footer-text);
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
-  transition: bottom 0.25s ease;
   padding: 22px;
-  box-sizing: border-box;
   border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 32px rgba(0,0,0,0.30);
+  transition: bottom 0.25s ease;
   z-index: 200;
 }
 
@@ -177,7 +190,6 @@ html, body {
 .footer-sub {
   font-size: 13px;
   opacity: 0.7;
-  margin-top: 4px;
 }
 
 .footer-rows {
@@ -189,24 +201,20 @@ html, body {
 
 .footer-row {
   display: flex;
-  justify-content: space-between;
   gap: 12px;
 }
 
 .footer-link {
   flex: 1;
-  padding: 12px 16px;
+  padding: 12px 14px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,0.1);
-  background: #1a242e;
-  text-align: center;
-  font-size: 13px;
-  cursor: pointer;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   color: var(--footer-text);
+  text-align: center;
 }
 
 .footer-donate {
   background: var(--footer-accent);
-  color: #00351f;
-  border-color: #0f6d52;
+  color: var(--footer-accent-text);
 }
