@@ -1,55 +1,339 @@
 /* ______________________________
-   LUCEN OS – COMPONENTS
-   Toolbar pills, cards, mini-items
+   LUCEN OS – CORE RUNTIME CSS
+   Neutral / rich layout + footer modes
 ________________________________ */
 
-window.LucenComponents = {
-  createToolbarPill(label, active, onClick) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "toolbar-pill" + (active ? " active" : "");
-    btn.textContent = label;
-    btn.onclick = onClick;
-    return btn;
-  },
+:root {
+  --bg: #f6f5f1;
+  --panel: #ffffff;
+  --text-main: #1e1f22;
+  --text-soft: #6d7379;
 
-  createCard({ title, summary, meta, buttonLabel, onOpen }) {
-    const card = document.createElement("div");
-    card.className = "card";
+  --accent: #12a37a;
+  --accent-deep: #007b55;
 
-    const t = document.createElement("div");
-    t.className = "card-title";
-    t.textContent = title;
-    card.appendChild(t);
+  --radius-lg: 24px;
+  --radius-pill: 999px;
 
-    if (summary) {
-      const s = document.createElement("div");
-      s.className = "card-summary";
-      s.textContent = summary;
-      card.appendChild(s);
-    }
+  --shadow-soft: 0 16px 45px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.09);
 
-    if (meta) {
-      const m = document.createElement("div");
-      m.className = "card-meta";
-      m.textContent = meta;
-      card.appendChild(m);
-    }
+  --footer-bg: #05070b;
+  --footer-text: #e7eef4;
+  --footer-accent: #18b374;
+}
 
-    if (buttonLabel && onOpen) {
-      const btnRow = document.createElement("div");
-      btnRow.className = "card-actions";
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "btn btn-primary";
-      btn.textContent = buttonLabel;
-      btn.onclick = onOpen;
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
-      btnRow.appendChild(btn);
-      card.appendChild(btnRow);
-    }
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #fdfdfb 0, #f2eee6 42%, #e8e1d6 100%);
+  color: var(--text-main);
+  padding-bottom: 280px; /* space for footer */
+}
 
-    return card;
+/* Main view shell */
+
+#app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+/* Header / Local Nav */
+
+.header-shell {
+  width: 100%;
+  background: rgba(246, 245, 241, 0.96);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 16px 14px;
+}
+
+.header-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.header-back {
+  min-width: 64px;
+}
+
+.header-top {
+  flex: 1;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.header-pos {
+  margin-top: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+/* Toolbar */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.toolbar-pill {
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 6px 14px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.toolbar-pill.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent-deep);
+}
+
+/* Generic buttons */
+
+.btn {
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent-deep);
+}
+
+/* Views + grid */
+
+.view {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 160ms ease-out, transform 160ms ease-out;
+}
+
+.view.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Cards */
+
+.card {
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  padding: 20px 18px 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.card-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.card-summary {
+  font-size: 14px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+
+.card-meta {
+  font-size: 12px;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+
+.card-actions {
+  margin-top: 6px;
+}
+
+/* Mini lists */
+
+.mini-list {
+  margin-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(248, 247, 244, 0.95);
+  cursor: pointer;
+}
+
+.mini-name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.mini-body {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.mini-body-detail {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+/* ______________________________
+   FOOTER – GLOBAL NAV
+________________________________ */
+
+.footer-shell {
+  position: fixed;
+  left: 0;
+  bottom: -260px; /* hidden off-screen until visible */
+  width: 100%;
+  z-index: 999;
+  transition: bottom 0.35s ease-out;
+}
+
+.footer-shell.visible {
+  bottom: 0;
+}
+
+.footer-shell.footer-static {
+  bottom: 0 !important;
+}
+
+.footer {
+  max-width: 960px;
+  margin: 0 auto 0;
+  padding: 16px 16px 18px;
+  border-radius: 24px 24px 0 0;
+  background: radial-gradient(circle at top, #101824 0, #05070b 60%);
+  box-shadow: 0 -26px 50px rgba(0, 0, 0, 0.55);
+  color: var(--footer-text);
+}
+
+.footer-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.footer-sub {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+/* 2 rows × 3 columns */
+
+.footer-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.footer-link,
+.footer-donate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 0;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(9, 16, 27, 0.95);
+  color: var(--footer-text);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer-link:hover,
+.footer-donate:hover {
+  background: #1a242f;
+}
+
+.footer-donate {
+  background: var(--footer-accent);
+  color: #00331f;
+  border-color: #0f6d52;
+}
+
+.footer-donate:hover {
+  background: #20c684;
+}
+
+/* Small screens */
+
+@media (max-width: 640px) {
+  #app {
+    padding: 16px 12px 40px;
   }
-};
+
+  .header {
+    padding-inline: 12px;
+  }
+
+  .footer {
+    border-radius: 18px 18px 0 0;
+    padding-inline: 12px;
+  }
+
+  .footer-actions {
+    gap: 8px;
+  }
+     }
