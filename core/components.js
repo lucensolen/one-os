@@ -1,29 +1,40 @@
-/* ================================
-   Lucen OS – Components Library
-================================ */
+/* =====================================================
+   ONE OS – COMPONENT LIBRARY
+   Cards • Toolbar Pills • UI Primitives
+===================================================== */
 
 window.LucenComponents = {
 
-  /* Pill for toolbars */
+  /* --------------------------------------
+     Toolbar Pills
+  -------------------------------------- */
   createToolbarPill(label, active, onClick) {
     const btn = document.createElement("button");
     btn.type = "button";
+
     btn.className = "toolbar-pill" + (active ? " active" : "");
     btn.textContent = label;
-    btn.onclick = onClick;
+
+    if (onClick) btn.onclick = onClick;
+
     return btn;
   },
 
-  /* Universal Card */
+  /* --------------------------------------
+     Universal Card Component
+     Used for: Master Fields, Fields, Modules
+  -------------------------------------- */
   createCard({ title, summary, meta, buttonLabel, onOpen }) {
     const card = document.createElement("div");
     card.className = "card";
 
-    const t = document.createElement("div");
-    t.className = "card-title";
-    t.textContent = title;
-    card.appendChild(t);
+    /* --- Title --- */
+    const h = document.createElement("div");
+    h.className = "card-title";
+    h.textContent = title;
+    card.appendChild(h);
 
+    /* --- Summary (optional) --- */
     if (summary) {
       const s = document.createElement("div");
       s.className = "card-summary";
@@ -31,6 +42,7 @@ window.LucenComponents = {
       card.appendChild(s);
     }
 
+    /* --- Metadata line (optional) --- */
     if (meta) {
       const m = document.createElement("div");
       m.className = "card-meta";
@@ -38,12 +50,15 @@ window.LucenComponents = {
       card.appendChild(m);
     }
 
+    /* --- Button (optional) --- */
     if (buttonLabel) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "btn card-btn";
       btn.textContent = buttonLabel;
-      btn.onclick = onOpen;
+
+      if (onOpen) btn.onclick = onOpen;
+
       card.appendChild(btn);
     }
 
